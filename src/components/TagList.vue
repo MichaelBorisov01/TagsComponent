@@ -1,17 +1,11 @@
 <template>
-  <div
-    :class="[
-      'tag-list',
-      alignment === 'left' ? 'align-left' : 'align-width',
-    ]"
-    :style="{ maxWidth: maxWidth }"
-  >
-    <div v-for="(tag, index) in tags" :key="index" class="tag">
+  <div :class="['tag-list', {'tag-list_align_left': alignment === 'left', 'tag-list_align_width': alignment === 'width'}]" :style="{ maxWidth: maxWidth }">
+    <div v-for="(tag, index) in tags" :key="index" class="tag-list__item">
       <span>{{ tag.text }}</span>
-      <v-icon v-if="tag.icon" :size="16" :color="iconColor">
+      <v-icon v-if="tag.icon" :size="16"  >
         {{ tag.icon }}
       </v-icon>
-      <v-icon v-if="index < tags.length - 1" :size="16" :color="iconColor">
+      <v-icon v-if="index < tags.length - 1" :size="16"  >
         mdi-circle-small
       </v-icon>
     </div>
@@ -33,10 +27,7 @@ export default {
       type: String,
       default: '100%',
     },
-    iconColor: {
-      type: String,
-      default: 'primary',
-    },
+    
   },
 }
 </script>
@@ -46,23 +37,23 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-}
 
-.align-left {
-  justify-content: flex-start;
-}
+  &_align_left {
+    justify-content: flex-start;
+  }
 
-.align-width {
-  justify-content: space-between;
-}
+  &_align_width {
+    justify-content: space-between;
+  }
 
-.tag {
-  margin: 0 8px;
-  display: flex;
-  align-items: center;
-}
+  &__item {
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+  }
 
-.tag + .tag {
-  margin-left: 16px;
+  &__item + &__item {
+    margin-left: 16px;
+  }
 }
 </style>
